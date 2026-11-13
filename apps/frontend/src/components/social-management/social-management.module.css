@@ -1,0 +1,767 @@
+.shell {
+  /* Share Postiz's live theme tokens instead of maintaining a separate palette. */
+  --sm-bg: var(--new-bgColorInner);
+  --sm-panel: var(--new-table-header);
+  --sm-elevated: var(--new-btn-simple);
+  --sm-border: var(--new-table-border);
+  --sm-text: rgb(var(--new-textColor));
+  --sm-muted: var(--new-textItemBlur);
+  --sm-blue: var(--new-btn-primary);
+  --sm-blue-soft: var(--new-box-hover);
+  --sm-success: #15803d;
+  --sm-warning: #9a6700;
+  --sm-error: #b91c1c;
+  background: var(--new-bgLineColor);
+  color: var(--sm-text);
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.shell * {
+  box-sizing: border-box;
+}
+.shell h1,
+.shell h2,
+.shell h3,
+.shell p {
+  margin: 0;
+}
+.shell h2 {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.shell h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+.shell a {
+  color: var(--new-table-text-focused);
+  text-decoration: none;
+}
+.shell a:hover {
+  text-decoration: underline;
+}
+.shell button,
+.secondary {
+  border: 1px solid var(--sm-border);
+  border-radius: 8px;
+  padding: 10px 15px;
+  min-height: 44px;
+  background: var(--sm-elevated);
+  color: var(--sm-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: background 0.15s, border-color 0.15s;
+  text-decoration: none;
+}
+.shell button:hover,
+.secondary:hover {
+  background: var(--new-box-hover);
+  border-color: var(--sm-border);
+  text-decoration: none;
+}
+.shell button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.shell button:focus-visible,
+.shell a:focus-visible,
+.shell input:focus-visible,
+.shell textarea:focus-visible,
+.shell select:focus-visible,
+.shell summary:focus-visible {
+  outline: 2px solid var(--new-table-text-focused) !important;
+  outline-offset: 3px;
+}
+.shell button.primary {
+  background: var(--sm-blue);
+  border-color: var(--sm-blue);
+  color: white;
+}
+.shell button.primary:hover {
+  background: var(--pradea-blue-hover);
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.top p {
+  color: var(--sm-muted);
+  margin-top: 8px;
+}
+.statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  border-bottom: 1px solid var(--sm-border);
+  padding-bottom: 16px;
+  color: var(--sm-muted);
+  font-size: 12px;
+}
+.statusbar span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.online,
+.offline {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  background: var(--sm-warning);
+}
+.online {
+  background: var(--sm-success);
+}
+.body {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1px;
+  min-height: calc(100vh - 105px);
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 20px;
+  background: var(--sm-bg);
+}
+.nav button {
+  justify-content: flex-start;
+  flex-shrink: 0;
+  align-self: stretch;
+  border: 0;
+  border-left: 4px solid transparent;
+  border-radius: 0 8px 8px 0;
+  background: transparent;
+  padding: 12px;
+  min-height: 50px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--sm-text);
+}
+.nav button.selected {
+  background: var(--new-box-hover);
+  border-left-color: var(--sm-blue);
+  color: var(--sm-text);
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 20px;
+  background: var(--sm-bg);
+}
+.hero {
+  padding: 20px;
+  background: var(--sm-panel);
+  border: 1px solid var(--sm-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.hero p {
+  color: var(--sm-muted);
+  max-width: 640px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+.card {
+  padding: 20px;
+  background: var(--sm-panel);
+  border: 1px solid var(--sm-border);
+  border-radius: 4px;
+  min-width: 0;
+}
+.cardHead {
+  margin-bottom: 22px;
+}
+.cardHead p {
+  color: var(--sm-muted);
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.65;
+}
+.card p {
+  white-space: pre-wrap;
+}
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.stats section {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+}
+.stats span {
+  font-size: 13px;
+  color: var(--sm-muted);
+}
+.stats strong {
+  font-size: 36px;
+  line-height: 1.4;
+  letter-spacing: -1px;
+  margin: 8px 0;
+}
+.stats small {
+  font-size: 12px;
+  color: var(--sm-muted);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  font-weight: 550;
+  min-width: 0;
+}
+.field small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--sm-muted);
+  line-height: 1.6;
+}
+.shell input:not([type='checkbox']),
+.shell textarea,
+.shell select {
+  width: 100%;
+  background: var(--sm-bg);
+  border: 1px solid var(--sm-border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: var(--sm-text);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 44px;
+}
+.shell textarea {
+  resize: vertical;
+}
+.shell input::placeholder,
+.shell textarea::placeholder {
+  color: var(--sm-muted);
+}
+.shell input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sm-blue);
+  flex-shrink: 0;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  margin-bottom: 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.actions small,
+.muted {
+  color: var(--sm-muted);
+  font-size: 13px;
+}
+.muted {
+  margin: 12px 0 !important;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.row p {
+  font-size: 13px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  padding: 4px 9px;
+  border-radius: 5px;
+  background: var(--sm-elevated);
+  color: var(--sm-text);
+}
+.badge.good {
+  background: color-mix(in srgb, var(--sm-success) 10%, var(--sm-bg));
+  color: var(--sm-success);
+}
+.badge.warn {
+  background: color-mix(in srgb, var(--sm-warning) 10%, var(--sm-bg));
+  color: var(--sm-warning);
+}
+.empty {
+  padding: 34px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
+  color: var(--sm-muted);
+  border: 1px dashed var(--sm-border);
+  border-radius: 8px;
+}
+.empty h3 {
+  color: var(--sm-text);
+}
+.empty p {
+  font-size: 13px;
+  max-width: 430px;
+}
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checklist > button {
+  background: transparent;
+  justify-content: flex-start;
+  text-align: left;
+  border-color: transparent;
+  padding: 9px 0;
+  font-size: 13px;
+  gap: 12px;
+}
+.checklist > button > svg:last-child {
+  margin-left: auto;
+  width: 15px;
+}
+.todo,
+.done {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--sm-border);
+  border-radius: 50%;
+}
+.done {
+  background: color-mix(in srgb, var(--sm-success) 10%, var(--sm-bg));
+  color: var(--sm-success);
+  border-color: var(--sm-success);
+}
+.runItem {
+  width: 100%;
+  display: flex !important;
+  justify-content: space-between !important;
+  text-align: left;
+  margin-bottom: 9px;
+  gap: 14px !important;
+  padding: 14px !important;
+  background: transparent !important;
+}
+.runItem small {
+  display: block;
+  font-size: 11px;
+  color: var(--sm-muted);
+  font-weight: 400;
+  margin-top: 5px;
+}
+.runItem.activeRun {
+  background: var(--sm-blue-soft) !important;
+  border-color: var(--sm-blue);
+}
+.detail {
+  margin: 15px 0;
+  border-bottom: 1px solid var(--sm-border);
+  padding-bottom: 12px;
+}
+.detail summary {
+  cursor: pointer;
+  font-size: 13px;
+  padding: 7px 0;
+  color: var(--sm-text);
+}
+.shell pre {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.output {
+  max-height: 550px;
+  overflow: auto;
+  background: var(--sm-bg);
+  padding: 18px;
+  border-radius: 8px;
+}
+.contentPreview {
+  max-height: 300px;
+  overflow: auto;
+}
+.error,
+.notice {
+  padding: 13px 16px;
+  border: 1px solid var(--sm-error);
+  background: color-mix(in srgb, var(--sm-error) 8%, var(--sm-bg));
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+.notice {
+  background: color-mix(in srgb, var(--sm-success) 10%, var(--sm-bg));
+  border-color: var(--sm-success);
+}
+.error button,
+.notice button {
+  padding: 0 9px;
+  background: transparent;
+  border: 0;
+  min-height: 24px;
+}
+.info {
+  background: var(--sm-bg);
+  border: 1px solid var(--sm-border);
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-weight: 400;
+  color: var(--sm-muted);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chips button {
+  font-size: 11px;
+  min-height: 32px;
+  padding: 4px 10px;
+}
+.platform {
+  text-transform: capitalize;
+  font-size: 12px;
+  color: var(--sm-muted);
+}
+.export {
+  border-top: 1px solid var(--sm-border);
+  margin-top: 20px;
+  padding-top: 16px;
+}
+.sourceUrl {
+  font-size: 12px;
+  display: block;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+.bubble {
+  padding: 16px;
+  background: var(--sm-panel);
+  border-radius: 12px 12px 12px 2px;
+  max-width: 85%;
+  margin: 18px 0;
+  white-space: pre-wrap;
+}
+.botBubble {
+  padding: 16px;
+  background: var(--new-box-hover);
+  border: 1px solid var(--sm-border);
+  border-radius: 12px 12px 2px 12px;
+  margin: 12px 0 12px auto;
+  max-width: 85%;
+}
+.botBubble small {
+  color: var(--sm-blue);
+  font-size: 11px;
+  display: block;
+  margin-bottom: 8px;
+}
+.metricFields {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.tableWrap {
+  overflow: auto;
+}
+.shell table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.shell th {
+  font-size: 11px;
+  color: var(--sm-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--sm-border);
+}
+.shell td {
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--sm-border);
+  vertical-align: top;
+}
+.shell td small {
+  display: block;
+  color: var(--sm-muted);
+  font-size: 11px;
+  max-width: 220px;
+  overflow-wrap: anywhere;
+  margin-top: 5px;
+}
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.skillGrid h3 {
+  margin: 14px 0 8px;
+  font-size: 16px;
+}
+.skillDescription {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--sm-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.skillGrid .actions {
+  gap: 8px;
+}
+.skillGrid .actions button {
+  font-size: 12px;
+  padding: 7px 10px;
+  min-height: 36px;
+}
+.skillGrid .actions a {
+  font-size: 12px;
+}
+.modal {
+  background: var(--sm-panel);
+  color: var(--sm-text);
+  border: 1px solid var(--sm-border);
+  border-radius: 14px;
+  padding: 28px;
+  max-width: 850px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: auto;
+}
+.modal pre {
+  font-size: 13px;
+}
+.modal h2 {
+  margin-bottom: 16px;
+}
+
+.hero > button {
+  flex-shrink: 0;
+}
+.shell .nav button:hover {
+  background: var(--new-box-hover);
+}
+.shell button {
+  font-family: inherit;
+}
+.shell th {
+  background: var(--new-table-header);
+}
+.error {
+  color: var(--sm-error);
+}
+.notice {
+  color: var(--sm-success);
+}
+.error button,
+.notice button {
+  color: inherit;
+}
+:global(.dark) .shell {
+  --sm-success: #86efac;
+  --sm-warning: #fcd34d;
+  --sm-error: #fca5a5;
+}
+.modal {
+  margin: auto;
+  width: calc(100% - 32px);
+}
+.modal::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+@media (max-width: 1000px) {
+  .body {
+    grid-template-columns: 210px minmax(0, 1fr);
+  }
+  .nav {
+    padding: 16px 12px;
+  }
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nav {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px;
+  }
+  .nav button {
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 8px;
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+  .nav button.selected {
+    border-bottom-color: var(--sm-blue);
+  }
+  .main {
+    padding: 16px 12px;
+    gap: 16px;
+  }
+  .top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .top p {
+    font-size: 13px;
+  }
+  .twoCol,
+  .skillGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card,
+  .hero {
+    padding: 16px;
+  }
+  .stats strong {
+    font-size: 28px;
+  }
+  .metricFields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bubble,
+  .botBubble {
+    max-width: 100%;
+  }
+  .modal {
+    padding: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shell * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keep the agent brief clear of both card edges. */
+.agentForm {
+  margin-inline: 10px;
+}
+.shell .agentForm input:not([type='checkbox']),
+.shell .agentForm textarea,
+.shell .agentForm select {
+  padding-inline: 12px;
+}
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 48vh;
+  overflow-y: auto;
+  padding: 3px;
+}
+.skillOption {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border: 1px solid var(--sm-border);
+  border-radius: 8px;
+  background: var(--sm-bg);
+  cursor: pointer;
+}
+.skillOption input {
+  margin-top: 3px;
+}
+.skillOption:has(input:checked) {
+  border-color: var(--sm-blue);
+}
+.skillOption:has(input:disabled) {
+  cursor: not-allowed;
+}
+.skillOption strong,
+.skillOption small {
+  display: block;
+}
+.skillOption small {
+  color: var(--sm-muted);
+  margin: 5px 0;
+  font-size: 12px;
+}
+.skillOption p {
+  font-size: 13px;
+}
+.importField {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid var(--sm-border);
+  border-radius: 8px;
+  background: var(--sm-bg);
+}
+.importField pre {
+  max-height: 160px;
+  overflow-y: auto;
+}
+.importField small {
+  color: var(--sm-muted);
+}

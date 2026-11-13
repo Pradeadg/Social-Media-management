@@ -1,0 +1,107 @@
+// Pradea brand tokens: change these to personalize the interface.
+:root {
+  --pradea-blue: #2563eb;
+  --pradea-blue-hover: #1d4ed8;
+  --pradea-highlight: #93c5fd;
+  --pradea-ink: #081222;
+  --pradea-panel: #101e33;
+  --pradea-border: #26384f;
+  --pradea-muted: #a8b8cf;
+}
+
+:root .dark, :root .light {
+  --new-btn-primary: var(--pradea-blue);
+  --color-forth: var(--pradea-blue);
+  --color-seventh: var(--pradea-blue-hover);
+  --color-custom4: #60a5fa;
+  --color-custom7: var(--pradea-blue);
+  --color-custom45: var(--pradea-blue);
+  --color-custom50: var(--pradea-blue-hover);
+  --color-custom51: var(--pradea-blue);
+  --new-ai-btn: #0369a1;
+}
+
+:root .dark {
+  --new-bgColor: var(--pradea-ink);
+  --new-bgColorInner: var(--pradea-panel);
+  --color-primary: var(--pradea-ink);
+  --new-border: var(--pradea-border);
+  --new-bgLineColor: #1c2d44;
+  --new-table-border: var(--pradea-border);
+  --new-table-header: #14243b;
+  --new-table-text-focused: var(--pradea-highlight);
+  --new-textItemBlur: var(--pradea-muted);
+  --new-box-hover: #1a2d47;
+  --new-settings: #14243b;
+  --new-btn-simple: #21344e;
+  --new-big-strips: #0c192b;
+}
+
+:root .light {
+  --new-textItemFocused: #1d4ed8;
+  --new-boxFocused: #dbeafe;
+  --new-table-text-focused: #1d4ed8;
+}
+
+.pradea-wordmark { display: inline-flex; align-items: center; gap: 12px; color: inherit; }
+.pradea-wordmark span { font-size: 28px; font-weight: 700; letter-spacing: -1px; }
+.pradea-auth {
+  width: 100%; min-height: 100dvh; display: grid;
+  grid-template-columns: minmax(380px, 0.92fr) minmax(0, 1.08fr);
+  background: var(--pradea-ink); color: #f8fafc;
+}
+.pradea-auth-form {
+  display: flex; flex-direction: column; padding: 40px clamp(24px, 5vw, 88px);
+  background: #0c1728; border-right: 1px solid var(--pradea-border);
+}
+.pradea-auth-form header { margin-bottom: 48px; }
+.pradea-auth-content { width: 100%; max-width: 420px; margin: auto; }
+.pradea-auth-content h1 { font-size: 34px; font-weight: 600; letter-spacing: -1px; }
+.pradea-auth-form footer { color: var(--pradea-muted); font-size: 12px; line-height: 1.6; margin-top: 40px; }
+.pradea-auth a { text-underline-offset: 4px; }
+.pradea-auth :is(input, button, a, [role='button']):focus-visible {
+  outline: 2px solid var(--pradea-highlight) !important; outline-offset: 4px;
+}
+.pradea-auth button { transition: background-color 160ms ease; }
+.pradea-auth button[type='submit']:hover { background: var(--pradea-blue-hover); }
+.pradea-auth-story {
+  padding: 64px clamp(28px, 5vw, 88px); display: flex; flex-direction: column;
+  justify-content: center; overflow: hidden;
+  background: radial-gradient(ellipse at 80% 20%, #173669 0, transparent 60%), var(--pradea-ink);
+}
+.pradea-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; color: var(--pradea-highlight); }
+.pradea-auth-story h2 { font-size: clamp(36px, 3.8vw, 62px); font-weight: 600; line-height: 1.12; letter-spacing: -2px; margin: 24px 0; }
+.pradea-auth-story h2 span { color: var(--pradea-highlight); }
+.pradea-auth-story > p { max-width: 420px; color: var(--pradea-muted); font-size: 16px; line-height: 1.8; }
+.pradea-board {
+  margin-top: 42px; border: 1px solid #355482; border-radius: 20px; padding: 24px;
+  background: linear-gradient(140deg, #162e50, #0e1d34); max-width: 500px;
+  box-shadow: 0 24px 70px #00000030;
+}
+.pradea-board-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pradea-board-head strong { font-size: 14px; font-weight: 600; }
+.pradea-board-head span { font-size: 11px; border: 1px solid #46658f; border-radius: 20px; padding: 5px 10px; color: #bfdbfe; }
+.pradea-week { margin: 24px 0 12px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.pradea-week span { text-align: center; font-size: 10px; color: var(--pradea-muted); }
+.pradea-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.pradea-days span { aspect-ratio: 1; border: 1px solid #294260; border-radius: 9px; background: #142842; }
+.pradea-days span:nth-child(3), .pradea-days span:nth-child(5), .pradea-days span:nth-child(10) {
+  background: var(--pradea-blue); border-color: #60a5fa; position: relative;
+}
+.pradea-days span:nth-child(3)::after, .pradea-days span:nth-child(5)::after, .pradea-days span:nth-child(10)::after {
+  content: ''; position: absolute; left: 25%; right: 25%; top: 50%; height: 3px; background: #dbeafe; border-radius: 2px;
+}
+.pradea-board-caption { border-top: 1px solid #294260; margin-top: 24px; padding-top: 18px; display: flex; gap: 10px; align-items: center; font-size: 12px; color: #c7d7eb; }
+.pradea-board-caption i { width: 7px; height: 7px; border-radius: 50%; background: #60a5fa; }
+.pradea-steps { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 28px; font-size: 12px; color: #c7d7eb; }
+.pradea-steps b { color: #60a5fa; margin-right: 6px; font-weight: 500; }
+@media (max-width: 900px) {
+  .pradea-auth { grid-template-columns: 1fr; }
+  .pradea-auth-story { display: none; }
+  .pradea-auth-form { border: 0; min-height: 100dvh; padding: 28px 24px; }
+  .pradea-auth-form header { margin-bottom: 36px; }
+  .pradea-auth-form footer { text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pradea-auth *, .pradea-auth *::after { transition: none !important; animation: none !important; }
+}

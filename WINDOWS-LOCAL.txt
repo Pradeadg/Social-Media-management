@@ -1,0 +1,104 @@
+PEMBARUAN PRADEA: baca PANDUAN-PRADEA.txt di folder outputs.
+Frontend siap diluncurkan dengan postiz-app/Start-Pradea.cmd.
+Status WSL sudah diperiksa: optional component Windows belum aktif.
+
+POSTIZ LOKAL — WINDOWS 10
+
+Project hasil perbaikan: C:\Users\nuroc\Documents\Codex\2026-11-12\saya-ingin-menjalankan-project-postiz-ini\outputs\postiz-app
+Folder asli D:\01. Pradea\UIUX Skill\postiz-app-main tidak diubah karena alat sesi tetap menolak akses tulis (EPERM), meskipun izin diberikan.
+
+RUNTIME DAN STRUKTUR
+- Node.js 22.23.4, pnpm 10.6.1; runtime portabel tersedia di .local-tools.
+- Jalankan perintah dari root project, bukan dari apps/frontend.
+- package.json + pnpm-lock.yaml di root mengelola semua dependency.
+- apps/frontend: Next.js 16.4.2, React 19.2.4, port 4200.
+- apps/backend: NestJS 11, API port 3000.
+- apps/orchestrator: worker Temporal untuk pekerjaan terjadwal.
+- apps/extension, apps/sdk, apps/commands: workspace tambahan, tetap dipertahankan.
+- libraries: kode bersama, provider sosial, database Prisma 6.5.0.
+- package-lock.json di apps/frontend kosong (tidak berisi dependency); tetap disimpan, tidak dipakai untuk instalasi.
+
+FRONTEND SAJA
+Buka PowerShell di folder project ini:
+  .\pnpm-local.cmd dev:frontend
+Lalu buka http://localhost:4200
+Atau klik dua kali Start-Frontend.cmd.
+Halaman frontend tidak berarti login/posting sudah berfungsi: backend dan layanan di bawah harus berjalan.
+
+APLIKASI LENGKAP
+1. Pasang Docker Desktop dan aktifkan backend WSL 2 / Linux containers.
+   Ikuti https://docs.docker.com/desktop/setup/install/windows-install/
+   Restart Windows bila installer meminta. Buka Docker Desktop sampai engine siap.
+   Verifikasi di terminal baru:
+     docker version
+     docker compose version
+     wsl --version
+   Windows yang terdeteksi: build 19045. Pemeriksaan virtualisasi/WSL lengkap belum berhasil dalam sesi ini.
+
+2. Di root project, jalankan layanan development yang disediakan repository:
+     docker compose -f docker-compose.dev.yaml up -d postiz-postgres postiz-redis temporal
+   PostgreSQL aplikasi: 17; Redis: 7.
+   Temporal 1.28.1 membawa PostgreSQL 16 dan Elasticsearch 7.17.27 sebagai dependensi.
+   Tunggu layanan siap; periksa:
+     docker compose -f docker-compose.dev.yaml ps
+     docker compose -f docker-compose.dev.yaml logs --tail 50 temporal
+
+3. Dependency memakai pnpm asli repository:
+     .\pnpm-local.cmd install --frozen-lockfile
+   Bila node_modules sudah terpasang, perintah ini hanya memverifikasi/sinkronisasi.
+   Prisma client dibuat saat postinstall. Bisa diulang:
+     .\pnpm-local.cmd prisma-generate
+
+4. Inisialisasi skema pada database lokal yang ditunjuk .env:
+     .\pnpm-local.cmd prisma-db-push
+   Jika Prisma meminta penghapusan data, berhenti dan tinjau database dahulu.
+   Jangan menambahkan --accept-data-loss, menjalankan prisma-reset, atau docker compose down -v.
+
+5. Jalankan frontend, backend, dan orchestrator bersama:
+     .\pnpm-local.cmd dev:local
+   Atau klik dua kali Start-Postiz.cmd.
+   Buka http://localhost:4200 dan buat akun lokal.
+   Gunakan localhost secara konsisten, jangan berganti ke 127.0.0.1 saat login.
+
+6. Berhenti: Ctrl+C pada terminal aplikasi. Layanan Docker dapat dihentikan tanpa menghapus volume:
+     docker compose -f docker-compose.dev.yaml stop
+
+ENVIRONMENT
+.env lokal baru dibuat, dengan JWT acak; jangan dibagikan atau di-commit.
+DATABASE_URL memakai postiz-local / postiz-local-pwd, sesuai compose DEVELOPMENT.
+FRONTEND_URL dan MAIN_URL = http://localhost:4200
+NEXT_PUBLIC_BACKEND_URL dan BACKEND_INTERNAL_URL = http://localhost:3000
+REDIS_URL = redis://localhost:6379
+TEMPORAL_ADDRESS = localhost:7233
+STORAGE_PROVIDER = local
+UPLOAD_DIRECTORY = path absolut folder uploads di salinan project ini.
+NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY = http://localhost:4200/uploads
+NOT_SECURED = true hanya untuk HTTP lokal.
+IS_GENERAL = true. EMAIL_PROVIDER tidak diaktifkan, sehingga aktivasi email tidak diperlukan.
+POSTIZ_GENERIC_OAUTH dikosongkan untuk login lokal; string "false" tetap truthy pada beberapa pemeriksaan source.
+API key media sosial diisi hanya untuk platform yang akan dihubungkan. OpenAI, pembayaran, email, dan Cloudflare memerlukan konfigurasi jika fiturnya digunakan.
+Bila memindahkan folder project, sesuaikan UPLOAD_DIRECTORY di .env.
+Jangan mencampur compose produksi dan development: nama container sama tetapi kredensial database berbeda.
+
+PENGUJIAN
+Hasil aktual akan dicatat di HASIL-PENGUJIAN.txt setelah pemeriksaan selesai.
+
+PERBAIKAN KONFIGURASI
+- Node Volta diselaraskan ke 22.23.4; pnpm portabel dipatok ke 10.6.1.
+- Skrip clean dist memakai Node.js sehingga tidak memerlukan rm/Git Bash.
+- Prisma memakai CLI lokal versi 6.5.0 yang terkunci di repository.
+- Instalasi native canvas, Prisma, dan esbuild diizinkan secara spesifik pada pnpm.
+- Frontend memakai --webpack agar sesuai konfigurasi Webpack/Sentry yang ada.
+- Build frontend memuat .env root dan diberi heap 8 GB; percobaan 4 GB kehabisan memori.
+- Root tracing monorepo ditentukan eksplisit.
+- isomorphic-dompurify dieksternalkan di server agar asset jsdom ditemukan. Sanitasi tetap aktif.
+- Lockfile pnpm dan versi dependency tidak diubah.
+
+BUILD (opsional untuk development)
+  .\pnpm-local.cmd build:frontend
+  .\pnpm-local.cmd build:backend
+  .\pnpm-local.cmd build:orchestrator
+Build frontend berat dan dapat memerlukan beberapa menit. PC ini memiliki RAM 32 GB.
+
+PATCH
+perbaikan-windows.patch berisi perubahan source/config saja, tanpa .env, dependency, dan runtime portabel. Salinan postiz-app adalah hasil yang sudah disiapkan untuk komputer ini.
